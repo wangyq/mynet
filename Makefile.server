@@ -8,7 +8,7 @@ SRC_FILE_TYPE = c
 
 #==================================================
 # module define
-SRC_MODULES = server_fork 
+SRC_MODULES = server_prefork 
 
 
 #==================================================
