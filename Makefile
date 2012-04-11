@@ -156,27 +156,27 @@ cleanall:clean
 -include $(OUTPUT_DEPS)
 
 #=========== user custom target define here ===================================
-#.PHONY:client
+.PHONY:client
 client: $(OUTPUT_DIR)/client.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
 
-#.PHONY:test
+.PHONY:fork
 fork: $(OUTPUT_DIR)/server_fork.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
 
-#.PHONY:test
+.PHONY:prefork
 prefork: $(OUTPUT_DIR)/server_prefork.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
 
-#.PHONY:test
+.PHONY:thread
 thread: $(OUTPUT_DIR)/server_thread.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
 
-#.PHONY:test
+.PHONY:prethread
 prethread: $(OUTPUT_DIR)/server_prethread.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
 
-#.PHONY:test
+.PHONY:mul
 mul: $(OUTPUT_DIR)/server_mul.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
 #.PHONY:test
