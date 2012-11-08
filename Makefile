@@ -11,7 +11,7 @@ SRC_FILE_TYPE = c
 SRC_DIR := src
 
 LIBS := -lpthread
-INCLUDE_PATH := -I$(SRC_DIR)/include 
+INCLUDE_PATH := -I$(SRC_DIR)/include -I$(SRC_DIR)
 
 #define main source file in which "main()" function exist!
 #MAIN_FILE = main
@@ -118,7 +118,7 @@ $(BUILD_DIR)/$(target): $(OUTPUT_DIR)/$(MAIN_FILE).o $(OUTPUT_DEPS) $(OUTPUT_OBJ
     
 #compile source files into object files
 $(OUTPUT_DIR)/%.o: %.$(SRC_FILE_TYPE) 
-	$(CC) $(CFLAGS) $(INCLUDE_PATH) -I $(basename $<) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) -I $(dir $<) -c $< -o $@
 
 #src dir compiler
 $(OUTPUT_DIR)/%.o: $(SRC_DIR)/%.$(SRC_FILE_TYPE)
@@ -179,9 +179,21 @@ prethread: $(OUTPUT_DIR)/server_prethread.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 .PHONY:mul
 mul: $(OUTPUT_DIR)/server_mul.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
-#.PHONY:test
+.PHONY:epoll_lt
 epoll_lt: $(OUTPUT_DIR)/server_epoll_lt.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
-#.PHONY:test
+.PHONY:epoll_et
 epoll_et: $(OUTPUT_DIR)/server_epoll_et.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
 	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
+
+.PHONY:hello
+hello: $(OUTPUT_DIR)/server_hello.o $(OUTPUT_DEPS) $(OUTPUT_OBJS)
+	$(LINK) $(LIB_PATH) $(OUTPUT_OBJS) $(CFLAGS) $< -o $(BUILD_DIR)/$@ $(LIBS)
+
+#========================================
+.PHONY:run_hello
+run_hello: $(BUILD_DIR)/hello
+	$<
+
+
+
